@@ -3,13 +3,16 @@ from typing import Optional
 
 
 class Solver:
-    @staticmethod
-    def solve(a: float, b: float, c: float) -> Optional[list[float]]:
-        if a == 0:
+    epsilon = 10e-6
+    @classmethod
+    def solve(cls, a: float, b: float, c: float) -> Optional[list[float]]:
+        if abs(a) < cls.epsilon:
             raise ZeroDivisionError
         D = b*b - 4 * a * c
         if D < 0:
             return None
+        elif D < cls.epsilon:
+            D = 0
         return [
             (-b - sqrt(D))/(2*a), (-b + sqrt(D))/(2*a)
         ]
