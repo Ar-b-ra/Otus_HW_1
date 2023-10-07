@@ -7,8 +7,8 @@ class Solver:
 
     @classmethod
     def solve(cls, a: float, b: float, c: float) -> Optional[list[float]]:
-        if not any([isinstance(a, float), isinstance(a, int)]) and any(
-                [isinstance(b, float), isinstance(b, int)]) and any([isinstance(c, float), isinstance(c, int)]):
+        if not (any([isinstance(a, float), isinstance(a, int)]) and any(
+                [isinstance(b, float), isinstance(b, int)]) and any([isinstance(c, float), isinstance(c, int)])):
             raise TypeError
         if abs(a) < cls.epsilon:
             raise ZeroDivisionError
