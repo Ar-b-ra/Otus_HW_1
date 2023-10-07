@@ -6,7 +6,7 @@ class Solver:
     epsilon = 10e-6
 
     @classmethod
-    def solve(cls, a: float, b: float, c: float) -> None | list[float]:
+    def solve(cls, a: float, b: float, c: float) -> Optional[list[float]]:
         if not any([isinstance(a, float), isinstance(a, int)]) and any(
                 [isinstance(b, float), isinstance(b, int)]) and any([isinstance(c, float), isinstance(c, int)]):
             raise TypeError
