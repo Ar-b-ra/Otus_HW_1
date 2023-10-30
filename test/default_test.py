@@ -1,3 +1,5 @@
+from math import sqrt
+
 import pytest
 
 from solver import Solver
@@ -27,7 +29,11 @@ def test_too_small_a():
 
 def test_too_small_D():
     assert Solver.solve(a=1, b=-2, c=1) == [1, 1]
-    roots = Solver.solve(1.0, 2.000000001, 1.0)
+    epsilon = 1e-9
+    a = 1
+    b = 2 * sqrt(epsilon)
+    c = epsilon
+    roots = Solver.solve(a, b, c)
     assert roots[0] == roots[1]
 
 

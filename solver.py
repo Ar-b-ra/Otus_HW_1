@@ -1,22 +1,23 @@
-from math import sqrt
-from typing import Optional
+from typing import Optional, List
+from math import isclose, sqrt
 
 
 class Solver:
-    epsilon = 10e-6
+    epsilon = 1e-9
 
     @classmethod
-    def solve(cls, a: float, b: float, c: float) -> Optional[list[float]]:
-        if not (any([isinstance(a, float), isinstance(a, int)]) and any(
-                [isinstance(b, float), isinstance(b, int)]) and any([isinstance(c, float), isinstance(c, int)])):
-            raise TypeError
-        if abs(a) < cls.epsilon:
-            raise ZeroDivisionError
+    def solve(cls, a: float, b: float, c: float) -> Optional[List[float]]:
+        if not (isinstance(a, (float, int)) and isinstance(b, (float, int)) and isinstance(c, (float, int))):
+            raise TypeError("a, b, and c should be of type float or int")
+        if isclose(a, 0, abs_tol=cls.epsilon):
+            raise ZeroDivisionError("a should not be zero")
+
         D = b * b - 4 * a * c
         if D < 0:
             return []
-        elif D < cls.epsilon:
+        elif isclose(D, 0, abs_tol=cls.epsilon):
             D = 0
+
         return [
             (-b - sqrt(D)) / (2 * a), (-b + sqrt(D)) / (2 * a)
         ]
